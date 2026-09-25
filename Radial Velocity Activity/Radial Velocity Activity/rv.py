@@ -105,8 +105,8 @@ class Star():
         outstr += 'P =  {:.3f} +\- {:.4f} days\n'.format(p,p_err)
         outstr += 'a = {:.3f} +\- {:.4f} AU\n'.format(a,a_err)
     
-        print self.name
-        print outstr
+        print(self.name)
+        print(outstr)
 
 def solve_kep_eqn(l,e):
     """ Solve Keplers equation x - e*sin(x) = l for x"""

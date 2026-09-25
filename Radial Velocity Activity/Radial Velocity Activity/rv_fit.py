@@ -38,7 +38,7 @@ def fit_data(star,fitting_function):
 
     # Set the inital guess for the semi-amplitude equal to the maximum stellar velocity
     # Hint: The velocity data are stored in star.vr
-    k0 = # FIX ME!
+    k0 = np.max[star.vr]
     tau0 = star.t[ star.vr == k0]
     if len(tau0) == 0:
         tau0 = star.t[0]
@@ -53,9 +53,9 @@ def fit_data(star,fitting_function):
     # Hint: curve_fit is called with the arguments, curv_fit(func,x,y)
     # where func is the fitting_function, and x,y are the data arrays
 
-    popt,pcov = curve_fit(fitting_function, #FIX ME!, #FIX ME!,
+    popt,pcov = curve_fit(fitting_function, star.t, star.rv,
                             sigma=star.vr_err,absolute_sigma=True,
-                            p0=initial_guess)
+                            p0=initial_guess) #FIX ME {two parameters after fitting_function}
 
     mp,e,p,w,a= star.recover_params(*popt)
     mp_err,e_err,p_err,w_err,a_err = star.get_uncertainties(pcov,*popt)
@@ -78,21 +78,23 @@ def fit_data(star,fitting_function):
 plt.close('all')
 # Load the data file in here
 # Pass the file name of the data file to the load_single_star function
-star= load_single_star( #FIX ME! )
+star = load_single_star(r"C:\Users\Asus\Desktop\Astrophysics-Q1-Special-Project\Astrophysics-Q1-Special-Project\Radial Velocity Activity\Radial Velocity Activity\hd5319.dat") # FIX ME
 
 # You now have a star object
 # Print out the star's name and mass
 # Hint: star is a class defined in rv.py with attributes name and mass
-
+print(star.name)
+print(star.mass)
 
 # Plot the data using the star.plot function
-# FIX ME!
+star.plot() #FIX ME!
 plt.show()
 
 
 # Now fit the data with the fit_data function defined above
+fit_data(star, fitting_function)
 
-#FIX ME!
+star.plot_data() #FIX ME!
 plt.show()
 
 
