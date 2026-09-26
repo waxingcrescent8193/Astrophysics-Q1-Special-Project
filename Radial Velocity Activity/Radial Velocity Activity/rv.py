@@ -146,7 +146,7 @@ def plot_data(star,t_fit,vr_fit,residuals,popt,pcov):
     mp,e,p,w,a = star.recover_params(*popt)
     mp_err,e_err,p_err,w_err,a_err = star.get_uncertainties(pcov,*popt)
       
-    legstr = 'Mp>{:.2f} +\- {:.2f} Mj, e={:.3f} +\- {:.2f}, P={:.1f} +\- {:.2f} days'.format(mp,mp_err,e,e_err,p,p_err)
+    legstr = 'Mp>{:.2f} +\\- {:.2f} Mj, e={:.3f} +\\- {:.2f}, P={:.1f} +\\- {:.2f} days'.format(mp,mp_err,e,e_err,p,p_err)
         
     fig = plt.figure(figsize=(20,10))
     gs = gridspec.GridSpec(3,4)

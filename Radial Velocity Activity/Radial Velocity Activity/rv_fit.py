@@ -38,10 +38,8 @@ def fit_data(star,fitting_function):
 
     # Set the inital guess for the semi-amplitude equal to the maximum stellar velocity
     # Hint: The velocity data are stored in star.vr
-    k0 = np.max[star.vr]
-    tau0 = star.t[ star.vr == k0]
-    if len(tau0) == 0:
-        tau0 = star.t[0]
+    k0 = np.max(star.vr) # FIX ME!
+    tau0 = star.t[np.argmax(star.vr)]
     w0 = 0
     e0 = 0.5
     initial_guess = (n0,tau0,k0,w0,e0)
@@ -53,13 +51,13 @@ def fit_data(star,fitting_function):
     # Hint: curve_fit is called with the arguments, curv_fit(func,x,y)
     # where func is the fitting_function, and x,y are the data arrays
 
-    popt,pcov = curve_fit(fitting_function, star.t, star.rv,
+    popt,pcov = curve_fit(fitting_function, star.t, star.vr,
                             sigma=star.vr_err,absolute_sigma=True,
-                            p0=initial_guess) #FIX ME {two parameters after fitting_function}
+                            p0=initial_guess)
 
     mp,e,p,w,a= star.recover_params(*popt)
     mp_err,e_err,p_err,w_err,a_err = star.get_uncertainties(pcov,*popt)
-    t_fit = np.linspace(star.t[0],star.t[-1],1e3)
+    t_fit = np.linspace(star.t[0],star.t[-1],num=1000)
     vr_fit = np.array([fitting_function(x,*popt) for x in t_fit])
     residuals = star.vr - np.array([fitting_function(x,*popt) for x in star.t])
 
@@ -78,7 +76,7 @@ def fit_data(star,fitting_function):
 plt.close('all')
 # Load the data file in here
 # Pass the file name of the data file to the load_single_star function
-star = load_single_star(r"C:\Users\Asus\Desktop\Astrophysics-Q1-Special-Project\Astrophysics-Q1-Special-Project\Radial Velocity Activity\Radial Velocity Activity\hd5319.dat") # FIX ME
+star = load_single_star(r"C:\Users\Asus\Desktop\Astrophysics-Q1-Special-Project\Astrophysics-Q1-Special-Project\Radial Velocity Activity\Radial Velocity Activity\HD 31253.dat") # FIX ME
 
 # You now have a star object
 # Print out the star's name and mass
@@ -93,8 +91,7 @@ plt.show()
 
 # Now fit the data with the fit_data function defined above
 fit_data(star, fitting_function)
-
-star.plot_data() #FIX ME!
+star.output_results()
 plt.show()
 
 
