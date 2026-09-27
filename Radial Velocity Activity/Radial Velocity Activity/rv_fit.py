@@ -36,7 +36,7 @@ def fit_data(star,fitting_function):
     # Set initial guesses to the parameters
     n0 = star.get_best_n()
 
-    # Set the initial guess for the semi-amplitude equal to the maximum stellar velocity
+    # Set the inital guess for the semi-amplitude equal to the maximum stellar velocity
     # Hint: The velocity data are stored in star.vr
     k0 = np.max(star.vr) # FIX ME!
     tau0 = star.t[np.argmax(star.vr)]
@@ -76,7 +76,7 @@ def fit_data(star,fitting_function):
 plt.close('all')
 # Load the data file in here
 # Pass the file name of the data file to the load_single_star function
-star = load_single_star("C:\Users\Asus\Desktop\Astrophysics-Q1-Special-Project\Astrophysics-Q1-Special-Project\Radial Velocity Activity\Radial Velocity Activity\HD 31253.dat") # FIX ME
+star = load_single_star(r"C:\Users\Asus\Desktop\Astrophysics-Q1-Special-Project\Astrophysics-Q1-Special-Project\Radial Velocity Activity\Radial Velocity Activity\HD 31253.dat") # FIX ME
 
 # You now have a star object
 # Print out the star's name and mass
